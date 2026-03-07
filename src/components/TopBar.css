@@ -1,0 +1,86 @@
+.topbar {
+  height: 60px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.topbar-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.topbar-title em {
+  font-style: italic;
+  color: var(--sage);
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--amber);
+  color: white;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(200, 133, 58, 0.3);
+}
+
+.upload-btn:hover {
+  background: #b8763a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(200, 133, 58, 0.4);
+}
+
+.upload-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.upload-btn-secondary {
+  background: var(--card);
+  color: var(--sage);
+  border: 1.5px solid var(--sage);
+  box-shadow: none;
+}
+
+.upload-btn-secondary:hover {
+  background: var(--sage-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(124, 154, 126, 0.2);
+}

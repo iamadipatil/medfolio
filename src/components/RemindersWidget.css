@@ -1,0 +1,283 @@
+.reminders-widget {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.reminders-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--text);
+  color: white;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-float);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.reminders-trigger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 56px rgba(44,62,53,0.24);
+}
+
+.reminders-trigger svg {
+  width: 16px;
+  height: 16px;
+}
+
+.reminder-count-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  background: var(--amber);
+  color: white;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border: 2px solid var(--text);
+}
+
+/* Panel */
+.reminders-panel {
+  width: 320px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-float);
+  margin-bottom: 12px;
+  overflow: hidden;
+  animation: springPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transform-origin: bottom right;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.panel-title em {
+  font-style: italic;
+  color: var(--sage);
+}
+
+.panel-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background 0.15s ease;
+}
+
+.panel-close:hover {
+  background: var(--border);
+}
+
+.panel-close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.reminders-list {
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.reminder-item:last-child {
+  border-bottom: none;
+}
+
+.reminder-item.urgent {
+  background: var(--amber-light);
+  border-left: 3px solid var(--amber);
+}
+
+.reminder-item.urgent:last-child {
+  border-bottom: none;
+}
+
+.reminder-item.done {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.reminder-item.removing {
+  animation: fadeSlideRight 0.35s ease forwards;
+}
+
+.reminder-days {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.reminder-vdivider {
+  width: 1px;
+  height: 32px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.reminder-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.reminder-person {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.reminder-person-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.reminder-doctor {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reminder-hospital {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reminder-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.btn-done, .btn-dismiss {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.btn-done {
+  background: var(--sage-light);
+  color: var(--sage);
+}
+
+.btn-done:hover {
+  background: #d0e8d0;
+}
+
+.btn-done svg {
+  width: 13px;
+  height: 13px;
+}
+
+.btn-dismiss {
+  background: #FFF0F0;
+  color: #C06060;
+}
+
+.btn-dismiss:hover {
+  background: #fde0e0;
+}
+
+.btn-dismiss svg {
+  width: 13px;
+  height: 13px;
+}
+
+.panel-footer {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.panel-footer-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.panel-footer-text svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+}
+
+.reminders-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+}

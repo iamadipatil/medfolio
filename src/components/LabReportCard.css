@@ -1,0 +1,265 @@
+.lab-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  animation: fadeSlideUp 0.4s ease both;
+}
+
+.lab-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.lab-card.removing {
+  animation: cardFadeOut 0.3s ease forwards;
+}
+
+/* Header */
+.lab-card-header {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  cursor: pointer;
+  gap: 16px;
+  user-select: none;
+}
+
+.lab-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.lab-report-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lab-report-meta {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lab-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge-abnormal {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #FFF0F0;
+  color: #C06060;
+  border: 1px solid #f0d0d0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-abnormal svg {
+  width: 10px;
+  height: 10px;
+}
+
+.badge-allnormal {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--sage-light);
+  color: var(--sage);
+  border: 1px solid #d0e4d0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-allnormal svg {
+  width: 10px;
+  height: 10px;
+}
+
+.badge-test-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.lab-card-chevron {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.25s ease;
+}
+
+.lab-card-chevron.open {
+  transform: rotate(180deg);
+}
+
+.lab-card-chevron svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Expanded body */
+.lab-card-body {
+  border-top: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Results table */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.results-table th {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.results-table th:last-child {
+  text-align: center;
+}
+
+.results-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #F5F1EC;
+  vertical-align: middle;
+}
+
+.results-table tr:last-child td {
+  border-bottom: none;
+}
+
+.results-table tr:hover td {
+  background: #FAFAF7;
+}
+
+.td-test-name {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.td-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.td-value.high {
+  color: #C06060;
+}
+
+.td-value.low {
+  color: #5B7EC4;
+}
+
+.td-value.normal {
+  color: var(--sage);
+}
+
+.td-range {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.td-status {
+  text-align: center;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.04em;
+}
+
+.status-pill.high {
+  background: #FFF0F0;
+  color: #C06060;
+}
+
+.status-pill.low {
+  background: #EBF0FB;
+  color: #5B7EC4;
+}
+
+.status-pill.normal {
+  background: var(--sage-light);
+  color: var(--sage);
+}
+
+/* Abnormal callout */
+.abnormal-callout {
+  border-left: 3px solid #C06060;
+  background: #FFF8F8;
+  padding: 12px 14px;
+  border-radius: 0 10px 10px 0;
+}
+
+.abnormal-callout-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C06060;
+  margin-bottom: 5px;
+}
+
+.abnormal-callout-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Footer */
+.lab-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+}

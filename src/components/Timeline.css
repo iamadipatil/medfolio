@@ -1,0 +1,69 @@
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 52px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--sage) 0%, var(--border) 100%);
+  z-index: 0;
+}
+
+.year-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 12px 0;
+  position: relative;
+  z-index: 1;
+  padding-left: 68px;
+}
+
+.year-divider:first-child {
+  padding-top: 0;
+}
+
+.year-label {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.year-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 68px;
+  padding-bottom: 16px;
+  z-index: 1;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 44px;
+  top: 20px;
+  width: 18px;
+  height: 18px;
+  background: var(--sage);
+  border-radius: 50%;
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--sage);
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.2);
+}

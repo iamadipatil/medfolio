@@ -281,3 +281,16 @@
   font-family: 'Jost', sans-serif;
   font-size: 13px;
 }
+
+@media (max-width: 600px) {
+  .reminders-widget {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    align-items: flex-end;
+  }
+
+  .reminders-panel {
+    width: 100%;
+  }
+}

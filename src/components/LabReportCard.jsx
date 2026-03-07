@@ -81,34 +81,36 @@ export default function LabReportCard({ report, animationIndex, onViewImage, onD
           {results && results.length > 0 && (
             <div>
               <div className="section-label">Test Results</div>
-              <table className="results-table">
-                <thead>
-                  <tr>
-                    <th>Test</th>
-                    <th>Value</th>
-                    <th>Normal Range</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {results.map((r, i) => (
-                    <tr key={i}>
-                      <td className="td-test-name">{r.testName}</td>
-                      <td>
-                        <span className={`td-value ${r.status}`}>
-                          {r.value}{r.unit ? ` ${r.unit}` : ''}
-                        </span>
-                      </td>
-                      <td className="td-range">{r.normalRange || '—'}</td>
-                      <td className="td-status">
-                        <span className={`status-pill ${r.status}`}>
-                          {r.status === 'high' ? 'HIGH' : r.status === 'low' ? 'LOW' : 'OK'}
-                        </span>
-                      </td>
+              <div className="results-table-wrap">
+                <table className="results-table">
+                  <thead>
+                    <tr>
+                      <th>Test</th>
+                      <th>Value</th>
+                      <th>Normal Range</th>
+                      <th>Status</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {results.map((r, i) => (
+                      <tr key={i}>
+                        <td className="td-test-name">{r.testName}</td>
+                        <td>
+                          <span className={`td-value ${r.status}`}>
+                            {r.value}{r.unit ? ` ${r.unit}` : ''}
+                          </span>
+                        </td>
+                        <td className="td-range">{r.normalRange || '—'}</td>
+                        <td className="td-status">
+                          <span className={`status-pill ${r.status}`}>
+                            {r.status === 'high' ? 'HIGH' : r.status === 'low' ? 'LOW' : 'OK'}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 

@@ -408,3 +408,28 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+@media (max-width: 600px) {
+  .modal-overlay {
+    align-items: flex-end;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .modal-footer .btn-cancel,
+  .modal-footer .btn-extract,
+  .modal-footer .btn-save {
+    width: 100%;
+    justify-content: center;
+  }
+}

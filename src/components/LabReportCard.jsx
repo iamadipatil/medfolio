@@ -3,12 +3,21 @@ import { formatDay, formatMonth, formatYear } from '../utils/helpers';
 import './LabReportCard.css';
 import './ConsultationCard.css';
 
-export default function LabReportCard({ report, animationIndex, onViewImage, onDelete }) {
+export default function LabReportCard({ report, animationIndex, onViewImage, onDelete, onUpdateDate }) {
   const [open, setOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const [editingDate, setEditingDate] = useState(false);
+  const [dateValue, setDateValue] = useState(report.date || '');
 
   const { date, reportName, labName, orderedBy, results, abnormalSummary, imageUrl } = report;
+
+  function handleDateSave() {
+    if (dateValue && dateValue !== date) {
+      onUpdateDate(report.id, dateValue);
+    }
+    setEditingDate(false);
+  }
 
   const abnormals = results?.filter(r => r.status === 'high' || r.status === 'low') || [];
   const allNormal = results?.length > 0 && abnormals.length === 0;
@@ -32,12 +41,43 @@ export default function LabReportCard({ report, animationIndex, onViewImage, onD
     >
       <div className="lab-card-header" onClick={() => setOpen(o => !o)}>
         {/* Date block — reuses consultation card date styles */}
-        <div className="card-date-block">
-          <div className="date-day-month">
-            {formatDay(date)}
-            <span className="date-month">{formatMonth(date)}</span>
-          </div>
-          <div className="date-year">{formatYear(date)}</div>
+        <div
+          className="card-date-block"
+          onClick={e => { if (editingDate) e.stopPropagation(); }}
+        >
+          {editingDate ? (
+            <input
+              type="date"
+              className="date-input-inline"
+              value={dateValue}
+              onChange={e => setDateValue(e.target.value)}
+              onBlur={handleDateSave}
+              onKeyDown={e => {
+                if (e.key === 'Enter') handleDateSave();
+                if (e.key === 'Escape') setEditingDate(false);
+              }}
+              onClick={e => e.stopPropagation()}
+              autoFocus
+            />
+          ) : (
+            <>
+              <div className="date-day-month">
+                {formatDay(date)}
+                <span className="date-month">{formatMonth(date)}</span>
+              </div>
+              <div className="date-year">{formatYear(date)}</div>
+              <button
+                className="date-edit-btn"
+                onClick={e => { e.stopPropagation(); setEditingDate(true); }}
+                title="Edit date"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+              </button>
+            </>
+          )}
         </div>
 
         <div className="card-divider" />

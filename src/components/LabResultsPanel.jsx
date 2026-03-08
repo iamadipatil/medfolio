@@ -1,7 +1,7 @@
 import LabReportCard from './LabReportCard';
 import './LabResultsPanel.css';
 
-export default function LabResultsPanel({ reports, onUpload, onViewImage, onDelete }) {
+export default function LabResultsPanel({ reports, onUpload, onViewImage, onDelete, onUpdateDate }) {
   const sorted = [...reports].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
@@ -79,6 +79,7 @@ export default function LabResultsPanel({ reports, onUpload, onViewImage, onDele
               animationIndex={index}
               onViewImage={onViewImage}
               onDelete={onDelete}
+              onUpdateDate={onUpdateDate}
             />
           ))}
         </div>

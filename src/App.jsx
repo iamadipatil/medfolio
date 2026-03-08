@@ -40,6 +40,7 @@ export default function App() {
   const [imageOverlay, setImageOverlay] = useState(null);
   const [activeTab, setActiveTab] = useState('prescriptions');
   const [showUploadLabModal, setShowUploadLabModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // ─── Initial load ────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -155,6 +156,11 @@ export default function App() {
     await db.insertConsultation(consultation);
   }
 
+  async function handleUpdateConsultationDate(id, date) {
+    setConsultations(prev => prev.map(c => c.id === id ? { ...c, date } : c));
+    await db.updateConsultationDate(id, date);
+  }
+
   async function handleDeleteConsultation(id) {
     setConsultations(prev => prev.filter(c => c.id !== id));
     await db.deleteConsultation(id);
@@ -178,6 +184,11 @@ export default function App() {
     setLabReports(prev => [report, ...prev]);
     setShowUploadLabModal(false);
     await db.insertLabReport(report);
+  }
+
+  async function handleUpdateLabReportDate(id, date) {
+    setLabReports(prev => prev.map(r => r.id === id ? { ...r, date } : r));
+    await db.updateLabReportDate(id, date);
   }
 
   async function handleDeleteLabReport(id) {
@@ -217,14 +228,20 @@ export default function App() {
   // ─── Main render ─────────────────────────────────────────────────────────────
   return (
     <div className="app">
+      {sidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
+      )}
+
       <Sidebar
         members={members}
         consultations={consultations}
         selectedMemberId={selectedMemberId}
-        onSelectMember={handleSelectMember}
-        onAddMember={() => setShowAddMemberModal(true)}
-        onEditMember={(member) => setEditingMember(member)}
+        onSelectMember={(id) => { handleSelectMember(id); setSidebarOpen(false); }}
+        onAddMember={() => { setShowAddMemberModal(true); setSidebarOpen(false); }}
+        onEditMember={(member) => { setEditingMember(member); setSidebarOpen(false); }}
         membersWithUrgentReminders={membersWithUrgentReminders}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
       <div className="main-wrapper">
@@ -233,6 +250,7 @@ export default function App() {
           activeTab={activeTab}
           onUploadPrescription={() => setShowUploadModal(true)}
           onUploadLab={() => setShowUploadLabModal(true)}
+          onMenuToggle={() => setSidebarOpen(o => !o)}
         />
 
         <div className="content-area">
@@ -266,6 +284,7 @@ export default function App() {
                       consultations={filteredConsultations}
                       onViewImage={(url) => setImageOverlay(url)}
                       onDelete={handleDeleteConsultation}
+                      onUpdateDate={handleUpdateConsultationDate}
                     />
                   )}
                 </>
@@ -277,6 +296,7 @@ export default function App() {
                   onUpload={() => setShowUploadLabModal(true)}
                   onViewImage={(url) => setImageOverlay(url)}
                   onDelete={handleDeleteLabReport}
+                  onUpdateDate={handleUpdateLabReportDate}
                 />
               )}
             </>

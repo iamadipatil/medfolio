@@ -31,6 +31,53 @@
   flex-shrink: 0;
   text-align: center;
   min-width: 44px;
+  position: relative;
+}
+
+.date-edit-btn {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  padding: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.card-date-block:hover .date-edit-btn {
+  display: flex;
+}
+
+.date-edit-btn:hover {
+  background: var(--sage-light);
+  color: var(--sage);
+}
+
+.date-edit-btn svg {
+  width: 9px;
+  height: 9px;
+}
+
+.date-input-inline {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  border: 1.5px solid var(--sage);
+  border-radius: 6px;
+  padding: 4px 5px;
+  background: var(--card);
+  color: var(--text);
+  width: 116px;
+  outline: none;
+  cursor: pointer;
 }
 
 .date-day-month {
@@ -448,4 +495,20 @@
 
 .confirm-no:hover {
   background: var(--border);
+}
+
+@media (max-width: 600px) {
+  .card-header {
+    gap: 10px;
+    padding: 14px 14px;
+  }
+
+  .card-body {
+    padding: 16px 14px;
+  }
+
+  .medicine-tags {
+    flex-direction: column;
+    gap: 4px;
+  }
 }

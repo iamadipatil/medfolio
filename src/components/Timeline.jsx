@@ -2,7 +2,7 @@ import { formatYear } from '../utils/helpers';
 import ConsultationCard from './ConsultationCard';
 import './Timeline.css';
 
-export default function Timeline({ consultations, onViewImage, onDelete }) {
+export default function Timeline({ consultations, onViewImage, onDelete, onUpdateDate }) {
   // Group by year
   const groups = [];
   let currentYear = null;
@@ -36,6 +36,7 @@ export default function Timeline({ consultations, onViewImage, onDelete }) {
               animationIndex={item.index}
               onViewImage={onViewImage}
               onDelete={onDelete}
+              onUpdateDate={onUpdateDate}
             />
           </div>
         );

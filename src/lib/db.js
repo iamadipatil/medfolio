@@ -112,6 +112,14 @@ export async function insertConsultation(c) {
   return consultationFromDb(data);
 }
 
+export async function updateConsultationDate(id, date) {
+  const { error } = await supabase
+    .from('consultations')
+    .update({ date })
+    .eq('id', id);
+  if (error) throw error;
+}
+
 export async function deleteConsultation(id) {
   const { error } = await supabase.from('consultations').delete().eq('id', id);
   if (error) throw error;
@@ -162,6 +170,14 @@ export async function insertLabReport(r) {
     .single();
   if (error) throw error;
   return labReportFromDb(data);
+}
+
+export async function updateLabReportDate(id, date) {
+  const { error } = await supabase
+    .from('lab_reports')
+    .update({ date })
+    .eq('id', id);
+  if (error) throw error;
 }
 
 export async function deleteLabReport(id) {

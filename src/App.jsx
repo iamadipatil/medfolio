@@ -15,6 +15,8 @@ import EmptyState from './components/EmptyState';
 import TabSwitcher from './components/TabSwitcher';
 import LabResultsPanel from './components/LabResultsPanel';
 import UploadLabModal from './components/UploadLabModal';
+import TrendsSummary from './components/TrendsSummary';
+import { computeTrends } from './utils/trends';
 import './App.css';
 
 const SEED_MEMBERS = [
@@ -117,6 +119,7 @@ export default function App() {
   ].sort((a, b) => b - a);
 
   const memberLabReports = labReports.filter(r => r.memberId === selectedMemberId);
+  const memberTrends = computeTrends(memberLabReports);
 
   // ─── Handlers ────────────────────────────────────────────────────────────────
 
@@ -256,48 +259,56 @@ export default function App() {
         <div className="content-area">
           {selectedMember && (
             <>
-              <ProfileCard member={selectedMember} consultations={memberConsultations} />
+              <div className="content-main">
+                <ProfileCard member={selectedMember} consultations={memberConsultations} />
 
-              <TabSwitcher
-                activeTab={activeTab}
-                onTabChange={setActiveTab}
-                prescriptionCount={memberConsultations.length}
-                labCount={memberLabReports.length}
-              />
-
-              {activeTab === 'prescriptions' && (
-                <>
-                  <FilterChips
-                    filter={filter}
-                    onFilterChange={(f) => { setFilter(f); if (f !== 'byyear') setSelectedYear(null); }}
-                    years={availableYears}
-                    selectedYear={selectedYear}
-                    onYearChange={setSelectedYear}
-                    consultations={memberConsultations}
-                  />
-                  {memberConsultations.length === 0 ? (
-                    <EmptyState onUpload={() => setShowUploadModal(true)} />
-                  ) : filteredConsultations.length === 0 ? (
-                    <div className="no-filter-results">No consultations match this filter.</div>
-                  ) : (
-                    <Timeline
-                      consultations={filteredConsultations}
-                      onViewImage={(url) => setImageOverlay(url)}
-                      onDelete={handleDeleteConsultation}
-                      onUpdateDate={handleUpdateConsultationDate}
-                    />
-                  )}
-                </>
-              )}
-
-              {activeTab === 'lab' && (
-                <LabResultsPanel
-                  reports={memberLabReports}
-                  onUpload={() => setShowUploadLabModal(true)}
-                  onViewImage={(url) => setImageOverlay(url)}
-                  onDelete={handleDeleteLabReport}
-                  onUpdateDate={handleUpdateLabReportDate}
+                <TabSwitcher
+                  activeTab={activeTab}
+                  onTabChange={setActiveTab}
+                  prescriptionCount={memberConsultations.length}
+                  labCount={memberLabReports.length}
                 />
+
+                {activeTab === 'prescriptions' && (
+                  <>
+                    <FilterChips
+                      filter={filter}
+                      onFilterChange={(f) => { setFilter(f); if (f !== 'byyear') setSelectedYear(null); }}
+                      years={availableYears}
+                      selectedYear={selectedYear}
+                      onYearChange={setSelectedYear}
+                      consultations={memberConsultations}
+                    />
+                    {memberConsultations.length === 0 ? (
+                      <EmptyState onUpload={() => setShowUploadModal(true)} />
+                    ) : filteredConsultations.length === 0 ? (
+                      <div className="no-filter-results">No consultations match this filter.</div>
+                    ) : (
+                      <Timeline
+                        consultations={filteredConsultations}
+                        onViewImage={(url) => setImageOverlay(url)}
+                        onDelete={handleDeleteConsultation}
+                        onUpdateDate={handleUpdateConsultationDate}
+                      />
+                    )}
+                  </>
+                )}
+
+                {activeTab === 'lab' && (
+                  <LabResultsPanel
+                    reports={memberLabReports}
+                    onUpload={() => setShowUploadLabModal(true)}
+                    onViewImage={(url) => setImageOverlay(url)}
+                    onDelete={handleDeleteLabReport}
+                    onUpdateDate={handleUpdateLabReportDate}
+                  />
+                )}
+              </div>
+
+              {memberTrends.length > 0 && (
+                <aside className="content-side">
+                  <TrendsSummary labReports={memberLabReports} />
+                </aside>
               )}
             </>
           )}

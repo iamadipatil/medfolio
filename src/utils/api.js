@@ -57,7 +57,7 @@ export async function extractPrescription(base64Data, mimeType) {
   "hospitalName": "string or null",
   "medicines": [{ "name": "string", "dosage": "string", "frequency": "string", "duration": "string", "category": "diabetic|antibiotic|supplement|cardiac|other" }],
   "tests": ["string"],
-  "notes": "string or null",
+  "notes": "string or null — combine ALL clinically relevant narrative text into one note, not just text near the medicine list. Include, whenever present: chief complaints / reason for visit, clinical examination findings, diagnosis, vaccination or procedure given during the visit, medicine application/usage instructions, and follow-up advice. Many prescriptions label these as separate sections (e.g. 'Chief Complaints:', 'Clinical examination:', 'Diagnosis:', 'Follow up Advice:') — read the whole document, not just the area around the medicines, and merge every labeled section into this field. Do not omit the diagnosis even if it's short (e.g. a single word like 'Wart').",
   "nextVisitDate": "YYYY-MM-DD or null"
 }`,
     'Extract prescription data from this and return as JSON only.'

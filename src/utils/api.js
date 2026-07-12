@@ -22,7 +22,7 @@ async function callClaude(apiKey, mimeType, base64Data, systemPrompt, userText) 
     method: 'POST',
     headers: buildHeaders(apiKey, mimeType),
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-5',
       max_tokens: 4096,
       system: systemPrompt,
       messages: [{
